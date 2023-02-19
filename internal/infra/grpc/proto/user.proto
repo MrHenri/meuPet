@@ -1,0 +1,25 @@
+syntax = "proto3";
+package pb;
+option go_package = "internal/infra/grpc/pb";
+
+message UserCreationInput {
+    string name = 1;
+    string email = 2;
+    string password = 3;
+    string phone = 4;
+}
+
+message UserOutput {
+    string id = 1;
+    string name = 2;
+    string email = 3;
+    string phone = 4;
+}
+
+message ResponseMessage {
+    bool success = 1;
+}
+
+service ManageUser {
+    rpc RegisterUser (UserCreationInput) returns (ResponseMessage);
+}
