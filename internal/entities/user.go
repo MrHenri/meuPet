@@ -9,19 +9,20 @@ import (
 
 type User struct {
 	ID       string `json:"id"`
+	Name     string `json:"name"`
 	Email    string `json:"email"`
 	Password string `json:"passoword"`
 	Phone    string `json:"phone"`
 }
 
-func NewUser(email, password, phone string) (*User, error) {
+func NewUser(name, email, password, phone string) (*User, error) {
 	id := entityPkg.NewID().String()
 	hash, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
 	if err != nil {
 		return nil, err
 	}
 
-	user := &User{ID: id, Email: email, Password: string(hash), Phone: phone}
+	user := &User{ID: id, Name: name, Email: email, Password: string(hash), Phone: phone}
 	return user, user.ValidateUserCreation()
 }
 
@@ -33,6 +34,9 @@ func (u *User) Authentication(passoword string) bool {
 func (u *User) ValidateUserCreation() error {
 	if u.ID == "" {
 		return errors.New("invalid ID Generated")
+	}
+	if u.Name == "" {
+		return errors.New("invalid name")
 	}
 	if u.Email == "" {
 		return errors.New("invalid Email")

@@ -6,6 +6,7 @@ import (
 )
 
 type UserInputDTO struct {
+	Name     string `json:"name"`
 	Email    string `json:"email"`
 	Password string `json:"password"`
 	Phone    string `json:"phone"`
@@ -13,6 +14,7 @@ type UserInputDTO struct {
 
 type UserOutputDTO struct {
 	ID    string `json:"id"`
+	Name  string `json:"name"`
 	Email string `json:"email"`
 	Phone string `json:"phone"`
 }
@@ -32,7 +34,7 @@ func NewUserUseCase(userRepository entities.UserRepositoryInterface,
 }
 
 func (u *UserUseCase) Register(userInputDTO UserInputDTO) error {
-	user, err := entities.NewUser(userInputDTO.Email, userInputDTO.Password, userInputDTO.Phone)
+	user, err := entities.NewUser(userInputDTO.Name, userInputDTO.Email, userInputDTO.Password, userInputDTO.Phone)
 	if err != nil {
 		return err
 	}

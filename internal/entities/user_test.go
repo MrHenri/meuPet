@@ -8,15 +8,17 @@ import (
 )
 
 func TestNewUser(t *testing.T) {
+	name := "test"
 	email := "example@example.com"
 	password := "password123"
 	phone := "123-456-7890"
 
-	user, err := NewUser(email, password, phone)
+	user, err := NewUser(name, email, password, phone)
 
 	assert.NotNil(t, user, "NewUser should return a non-nil User pointer")
 	assert.NoError(t, err, "NewUser should not return an error")
 
+	assert.Equal(t, name, user.Name, "User name should match input name")
 	assert.Equal(t, email, user.Email, "User email should match input email")
 	assert.Equal(t, phone, user.Phone, "User phone should match input phone")
 	assert.NotEmpty(t, user.ID, "User ID should not be empty")

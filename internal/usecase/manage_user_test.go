@@ -51,6 +51,7 @@ func TestRegister(t *testing.T) {
 
 	t.Run("Success", func(t *testing.T) {
 		userInputDTO := UserInputDTO{
+			Name:     "test",
 			Email:    "test@example.com",
 			Password: "password",
 			Phone:    "123456789",
@@ -65,6 +66,7 @@ func TestRegister(t *testing.T) {
 
 	t.Run("Invalid Input", func(t *testing.T) {
 		userInputDTO := UserInputDTO{
+			Name:     "",
 			Email:    "",
 			Password: "",
 			Phone:    "",
@@ -79,6 +81,7 @@ func TestRegister(t *testing.T) {
 
 	t.Run("Repository Error", func(t *testing.T) {
 		userInputDTO := UserInputDTO{
+			Name:     "test",
 			Email:    "test@test.com",
 			Password: "password",
 			Phone:    "12345678",
