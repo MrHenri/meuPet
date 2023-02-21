@@ -1,6 +1,7 @@
 version: "3.9"
 services:
   db:
+    container_name: meu_pet_db
     image: mysql:latest
     restart: always
     environment:
@@ -8,6 +9,8 @@ services:
       MYSQL_DATABASE: meu_pet
       MYSQL_USER: pet
       MYSQL_PASSWORD: pet
+    volumes:
+      - /scripts/mysql:/docker-entrypoint-initdb.d
     healthcheck:
       test: ["CMD-SHELL", "mysqladmin ping -h 127.0.0.1 -uexample -pexample"]
       interval: 10s

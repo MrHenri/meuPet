@@ -25,12 +25,17 @@ type UserUseCase struct {
 	UserEventDispatch events.EventDispatcherInterface
 }
 
-func NewUserUseCase(userRepository entities.UserRepositoryInterface,
-	userEvent events.EventInterface,
-	userEventDispatch events.EventDispatcherInterface) *UserUseCase {
-	return &UserUseCase{UserRepository: userRepository,
-		UserEvent:         userEvent,
-		UserEventDispatch: userEventDispatch}
+//TODO: Event
+// func NewUserUseCase(userRepository entities.UserRepositoryInterface,
+// 	userEvent events.EventInterface,
+// 	userEventDispatch events.EventDispatcherInterface) *UserUseCase {
+// 	return &UserUseCase{UserRepository: userRepository,
+// 		UserEvent:         userEvent,
+// 		UserEventDispatch: userEventDispatch}
+// }
+
+func NewUserUseCase(userRepository entities.UserRepositoryInterface) *UserUseCase {
+	return &UserUseCase{UserRepository: userRepository}
 }
 
 func (u *UserUseCase) Register(userInputDTO UserInputDTO) error {
@@ -43,5 +48,7 @@ func (u *UserUseCase) Register(userInputDTO UserInputDTO) error {
 		return err
 	}
 
-	return u.UserEventDispatch.Dispatch(u.UserEvent)
+	return nil
+	//TODO: Event
+	// return u.UserEventDispatch.Dispatch(u.UserEvent)
 }

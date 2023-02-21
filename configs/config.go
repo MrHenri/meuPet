@@ -7,7 +7,7 @@ import (
 	"github.com/spf13/viper"
 )
 
-type conf struct {
+type Conf struct {
 	DBDriver       string `mapstructure:"DB_DRIVER"`
 	DBHost         string `mapstructure:"DB_HOST"`
 	DBPort         string `mapstructure:"DB_PORT"`
@@ -18,7 +18,7 @@ type conf struct {
 	GRPCServerPort string `mapstructure:"GRPC_SERVER_PORT"`
 }
 
-func Load() (*conf, error) {
+func Load() (*Conf, error) {
 
 	// Get the file path of the current function call
 	_, filePath, _, ok := runtime.Caller(0)
@@ -29,7 +29,7 @@ func Load() (*conf, error) {
 	// Remove the file name from the path
 	dirPath := path.Dir(filePath)
 
-	var cfg *conf
+	var cfg *Conf
 	viper.SetConfigFile(dirPath + "/.env")
 	err := viper.ReadInConfig()
 	if err != nil {
